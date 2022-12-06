@@ -25,18 +25,34 @@ namespace TelephoneGame
 
             Console.WriteLine("Willkommen beim Telefongame");
 
-            
+            Console.WriteLine("Wie viele Spieler gibt es?");
             do
             {
-                Console.WriteLine("Wie viele Spieler gibt es?");
-                inputNumberOfPlayers = Console.ReadLine().Trim(' ');
-            } while (!inputNumberOfPlayers.All(Char.IsDigit));
-            playersCount = Convert.ToInt32(inputNumberOfPlayers);
+                try
+                {
+                    Console.WriteLine("Bitte gebe eine positive Ganzzahl an!");
+                    inputNumberOfPlayers = Console.ReadLine().Trim(' ');
+                    playersCount = Convert.ToInt32(inputNumberOfPlayers);
+                }
+                catch (FormatException)
+                {
+                    playersCount = 0;
+                }
+            } while (playersCount <= 0);
 
             do
             {
                 Console.WriteLine("Auf einer Skala von 1-5, wie schlecht hören die Spieler? (1-5)");
-                difficulty = Convert.ToInt32(Console.ReadLine().Trim(' '));
+                try
+                {
+                    difficulty = Convert.ToInt32(Console.ReadLine().Trim(' '));
+                }
+                catch (FormatException)
+                {
+                    difficulty = -10;
+                    Console.WriteLine("Please type in a valid Number!");
+                }
+
             } while (difficulty <= 0 || difficulty > 5);
 
             // Start Text

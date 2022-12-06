@@ -16,15 +16,16 @@ namespace TelephoneGame
             Random random = new Random();
             String startText;
             String actualText;
+            String inputNumberOfPlayers;
 
 
-            List<Char> vocals = new List<Char>() { 'a', 'e', 'i', 'o', 'u', 'ä', 'ö', 'ü' };
-            // Make Consonantslist
+            Char[] vocals = new char[] { 'a', 'e', 'i', 'o', 'u', 'ä', 'ö', 'ü' };
+            // Make Consonantslist is a char Array
             Char[] consonants = "bcdfghjklmnpqrstvwxyz".ToCharArray();
 
             Console.WriteLine("Willkommen beim Telefongame");
 
-            String inputNumberOfPlayers;
+            
             do
             {
                 Console.WriteLine("Wie viele Spieler gibt es?");
@@ -51,18 +52,23 @@ namespace TelephoneGame
                 // Loop for Difficulty (How many letters will be replaced)
                 for (int y = 0; y < difficulty; y++)
                 {
-                againPosition:
-                    int position = random.Next(startText.Length);
-                    Char letter = actualText.ElementAt(position);
-                    if (!Char.IsLetter(letter))
-                    {
-                        goto againPosition;
-                    }
-                    // Check if it is UpperCase
-                    Boolean isUpper = Char.IsUpper(letter);
-                    // Check if it is a vocal
+                    Char letter;
+                    Char replacingLetter;
+                    int position;
+                    Boolean isUpper;
+                    Boolean isVocal;
 
-                    Boolean isVocal = false;
+                    do
+                    {
+                        position = random.Next(startText.Length);
+                        letter = actualText.ElementAt(position);
+                    } while (!Char.IsLetter(letter));
+
+                    // Check if it is UpperCase
+                    isUpper = Char.IsUpper(letter);
+                    // Check if it is a vocal
+                    isVocal = false;
+
                     foreach (var item in vocals)
                     {
                         if (item == Char.ToLower(letter))
@@ -71,10 +77,9 @@ namespace TelephoneGame
                         }
                     }
                     // Replace. Replace is made using a stringbuilder
-                    Char replacingLetter;
                     if (isVocal)
                     {
-                        replacingLetter = vocals[random.Next(vocals.Count)];
+                        replacingLetter = vocals[random.Next(vocals.Length)];
                     }
                     else
                     {

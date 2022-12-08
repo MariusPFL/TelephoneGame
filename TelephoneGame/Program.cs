@@ -18,9 +18,7 @@ namespace TelephoneGame
             String actualText;
             String inputNumberOfPlayers;
 
-
-            Char[] vocals = new char[] { 'a', 'e', 'i', 'o', 'u', 'ä', 'ö', 'ü' };
-            // Make Consonantslist is a char Array
+            Char[]  vocals = "aeiouäöü".ToCharArray();
             Char[] consonants = "bcdfghjklmnpqrstvwxyz".ToCharArray();
 
             Console.WriteLine("Willkommen beim Telefongame");
@@ -108,8 +106,9 @@ namespace TelephoneGame
                 // Just for fun
                 Thread.Sleep(400);
                 // Text will be displayed
-                Console.WriteLine($"Spieler {playersCounter} sagt: {actualText}");
+                Console.WriteLine($"Spieler {playersCounter + 1} sagt: {actualText}");
             }
+            Console.WriteLine($"\nDer Ursprungssatz war: {startText}");
             Console.ReadKey();
         }
     }
